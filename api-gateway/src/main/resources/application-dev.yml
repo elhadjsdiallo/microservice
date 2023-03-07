@@ -1,0 +1,35 @@
+#spring.mvc.pathmatch.matching-strategy=ant_path_matcher
+logging:
+  level:
+    root: INFO
+spring:
+  
+  application:
+    name: api-gateway
+  # routes configuration
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+          - Path=/api/product/
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+          - Path=/api/order/
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+          - Path=/api/inventory/
+    
+  
+eureka:
+  instance:
+    hostname: localhost
+    appname:  ${spring.application.name}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

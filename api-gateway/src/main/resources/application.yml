@@ -1,0 +1,6 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev
+    ## app-db,inventory-db,product-dbks
